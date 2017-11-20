@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<h1>My Tasks</h1>
+
+<div th:each="task : ${tasks}" class="task">
+    <input type="checkbox" title="checkbox"/>
+    <span th:text="${task.name}">Task</span>
+</div>
+
+<form action="#" th:action="@{/tasks}" th:object="${task}" method="post">
+    <label for="new-task">New Task</label>
+    <input type="text" id="new-task" name="new-task" th:field="*{name}" placeholder="New Task" />
+    <input type="submit"/>
+    <p class="alert alert-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
+</form>
+
+</body>
+</html>
